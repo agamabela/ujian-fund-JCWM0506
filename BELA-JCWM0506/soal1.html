@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal1</title>
+</head>
+
+<body>
+    <center>
+        <table>
+            <thead>
+                <th><label> Nilai Baris Segitiga</label></th>
+                <th><input type="text" name="baris" id="sgtg"></th>
+                <th><input type="button" value="Angka" onclick="btnKlik()"></th>
+                <th><input type="button" value="Huruf" onclick="btnClick()"></th>
+            </thead>
+
+            </thead>
+            <tbody id="hasil">
+
+            </tbody>
+        </table>
+    </center>
+
+</body>
+<script>
+    function btnKlik() {
+        let n = document.getElementById("sgtg").value
+        if (parseInt(n) <=  4){
+        let hasil = ''
+        let bil = 1
+
+        for (let baris = 0; baris < n; baris++) {
+            for (let kolom = 0; kolom <= baris; kolom++) {
+                hasil += `${bil}`
+                bil += 2
+            }
+            hasil += "<br>"
+        }
+        console.log(hasil)
+        document.getElementById("hasil").innerHTML = hasil
+    } else{
+        alert("Nilai tidak boleh lebih dari 4")
+    }
+
+    }
+    function btnClick() {
+        let n = document.getElementById("sgtg").value
+        if (parseInt(n) <=  4){
+        let hasil = ''
+        let bil = 1
+
+        for (let baris = 0; baris < n; baris++) {
+            for (let kolom = 0; kolom <= baris; kolom++) {
+                hasil += String.fromCharCode(bil + 65)
+                bil+=2
+            }
+            hasil += "<br>"
+        }
+        console.log(hasil)
+        document.getElementById("hasil").innerHTML = hasil
+    } else{
+        alert("Nilai tidak boleh lebih dari 4")
+    }
+
+    }
+</script>
+
+</html>

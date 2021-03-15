@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal 3</title>
+    <style>
+        table.GeneratedTable {
+            width: 100%;
+            background-color: #ffffff;
+            border-collapse: collapse;
+            border-width: 2px;
+            border-color: #ffcc00;
+            border-style: solid;
+            color: #000000;
+        }
+
+        table.GeneratedTable td,
+        table.GeneratedTable th {
+            border-width: 2px;
+            border-color: #ffcc00;
+            border-style: solid;
+            padding: 3px;
+        }
+
+        table.GeneratedTable thead {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <center>
+            <h1>Soal 3</h1>
+           
+            <fieldset>
+                <legend>Input Data</legend>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="nama" id="nama" placeholder="Username"></td>
+                            <td><input type="text" name="email" id="email" placeholder="Email"></td>
+                            <td><select name="kategori" id="kategori">
+                                    <option value="user">User</option>
+                                    <option value="admin">admin</option>
+            
+                                </select></td>
+                        </tr>
+                    </tbody>
+                    <tr>
+                        <td><button type="button" onclick="submitData()">Input</button></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Tabel Data</legend>
+                <table class="GeneratedTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hasilnya">
+
+                    </tbody>
+                </table>
+            </fieldset>
+        </center>
+    </div>
+</body>
+
+<script>
+    let dataPenjualan = []
+    let categories = [
+        {
+            name: 'User',
+            value: 'user'
+        },
+        {
+            name: 'Admin',
+            value: 'admin'
+        }
+    ]
+    var options = ''
+    categories.forEach(category => {
+        options += `<option value="${category.value}">${category.name}</option>`
+    })
+    document.getElementById('kategori').innerHTML = options
+    class toDo {
+        constructor(_nama, _email, _kategori) {
+            
+            this.nama = _nama
+            this.email = _email
+            this.kategori = _kategori
+        }
+    }
+    function submitData() {
+        let nama = document.getElementById("nama").value
+        let email = document.getElementById("email").value
+        let kategori= document.getElementById("kategori").value
+        if(nama == null || nama == ""){
+            alert("isi kolom nama")
+        } else if(email == null || email == ""){
+        alert("Isi kolom email")
+    } else if (kategori == null || kategori == "") {
+        alert("isi kolom kategori")
+    } else if(nama == null || nama == "", email == null || email == "", kategori == null ||kategori == ""){
+        alert("isi kolom")
+    } else{
+        dataPenjualan.push(new toDo( nama, email, kategori))
+        printJual()
+        document.getElementById("nama").value = null
+        document.getElementById("email").value = null
+        document.getElementById("kategori").value = null
+    }
+
+    }
+    function printJual(index, dataPenjualanProduk = dataPenjualan) {
+        let htmlElement = dataPenjualanProduk.map((item, idx) => {
+            var opt = ''
+            categories.forEach(category => {
+                opt += `<option value="${category.value}" ${category.name == item.kategori ? 'selected' : ''}>${category.name}</option>`
+            })
+            if (index == idx) {
+                return `<tr>
+                <td>${idx + 1}</td>
+                <td><input type="text" id="newNama" value="${item.nama}"></td>
+                <td><input type="text" id="newEmail" value="${item.email}"></td>
+                
+                <td>
+                    <select id="newKategori" value="${item.kategori}"> 
+                    ${opt}
+                    </select></td>
+                <td><input type="button" value="save" onclick="onBtnSave(${index})"> <input type="button" value="cancel" id="hapus" onclick="onBtnCancel(${index})"></td>
+                </tr>
+            
+            `
+            } else {
+                return `<tr>
+                <td>${idx + 1}</td>
+                <td>${item.nama}</td>
+                <td>${item.email}</td>
+                <td>${item.kategori}</td>
+                <td><input type="button" value="edit" onclick="onBtnEdit(${idx})"> <input type="button" value="delete" id="hapus" onclick="onBtnDelete(${idx})"></td>
+                </tr>
+            
+            `
+            }
+        })
+        document.getElementById("hasilnya").innerHTML = htmlElement.join('')
+    }
+    function onBtnDelete(index) {
+        dataPenjualan.splice(index, 1)
+        printJual()
+    }
+
+    function onBtnEdit(index) {
+        printJual(index)
+    }
+    function onBtnSave(index) {
+        if (confirm('mau simpan?')) {
+            dataPenjualan[index].nama = document.getElementById("newNama").value
+            dataPenjualan[index].email = document.getElementById("newEmail").value
+            dataPenjualan[index].kategori = document.getElementById("newKategori").value
+
+
+            printJual()
+        }
+        console.log(dataPenjualan)
+    }
+
+    function onBtnCancel(index) {
+        dataPenjualan[index].nama
+        dataPenjualan[index].email
+        dataPenjualan[index].kategori
+        printJual()
+    }
+
+    printJual()
+</script>
+
+</html>

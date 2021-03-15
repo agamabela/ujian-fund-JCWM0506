@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal 2</title>
+</head>
+
+<body>
+    <h1>Fibonacci</h1>
+    <th><label> Nilai Fibonacci</label></th>
+    <th><input type="text" name="baris" id="sgtg"></th>
+    <td><input type="button" value="Show" onclick="hasil()"></td>
+    <td><input type="button" value="Genap" onclick="genap()"></td>
+    <td><input type="button" value="Ganjil" onclick="ganjil()"></td>
+
+    <tbody id="hasilSegitiga">
+        <h2>Result!</h2>
+
+    </tbody>
+</body>
+<script>
+    let num = document.getElementById("sgtg").value 
+   function hasil(num){
+       let x = 0
+       let y = 1
+       let arrayFib = [0]
+
+       while(y<num){
+           arrayFib.push(y)
+           y += x
+           x= y-x
+       }
+       return arrayFib
+   }
+   console.log(hasil(10))
+   document.getElementById("hasilSegitiga").innerHTML = hasil(num).join('')
+
+   function genap(){
+    let x = 0
+       let y = 1
+       let arrayFib = [0]
+
+       while(y<= num){
+
+           if(y%2 !==0){
+               arrayFib+=y
+           } else{
+           y += x
+           x= y-x
+           }
+       }
+       return arrayFib
+   }
+   console.log(hasil(10))
+   document.getElementById("hasilSegitiga").innerHTML = hasil(num).join('')
+
+    function ganjil(){
+        let x = 0
+       let y = 1
+       let arrayFib = [0]
+
+       while(y<= num){
+
+           if(y%2==0){
+               arrayFib+=y
+           } else{
+           y += x
+           x= y-x
+           }
+       }
+       return arrayFib
+   }
+   console.log(hasil(10))
+   document.getElementById("hasilSegitiga").innerHTML = hasil(num).join('')
+    
+</script>
+</html>
